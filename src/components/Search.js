@@ -3,11 +3,12 @@ import axios from 'axios';
 
 const Search = () => {
 
-  const [term, setTerm] = useState('');
+  const [term, setTerm] = useState('programming');
+  const [resulsts, setResults] = useState([]);
 
   useEffect(() => {
     const search = async() => {
-      await axios.get('https://en.wikipedia.org/w/api.php', {
+      const {data} = await axios.get('https://en.wikipedia.org/w/api.php', {
         params: {
           action: 'query',
           list: 'search',
@@ -16,22 +17,41 @@ const Search = () => {
           srsearch: term,
         },
       });
+      setResults(data.query.search);
     }
     search();
   }, [term]);
 
+  const renderResults = resulsts.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="content">
+          <div className="header">
+            {result.title}
+          </div>
+          {result.snippet}
+        </div>
+      </div>
+    )
+  })
+
   return (
-    <div className="ui form">
-      <div className="field">
-        <label>Enter Search Term</label>
-        <input
-          value={term}
-          onChange={e => setTerm(e.target.value)} 
-          className="input"
-        />
+    <div>
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Search Term</label>
+          <input
+            value={term}
+            onChange={e => setTerm(e.target.value)} 
+            className="input"
+          />
+        </div>
+      </div>
+      <div className="ui celled list">
+        {renderResults}
       </div>
     </div>
-  )
+  );
 };
 
 export default Search
