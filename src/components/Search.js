@@ -4,7 +4,7 @@ import axios from 'axios';
 const Search = () => {
 
   const [term, setTerm] = useState('programming');
-  const [resulsts, setResults] = useState([]);
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     const search = async() => {
@@ -20,7 +20,7 @@ const Search = () => {
       setResults(data.query.search);
     };
 
-    if(term && !resulsts.length){
+    if(term && !results.length){
       search()
     } else {
       const setTimeId = setTimeout(() => {
@@ -34,9 +34,9 @@ const Search = () => {
       };
   
     }
-  }, [term]);
+  }, [term, results.length]);
 
-  const renderResults = resulsts.map((result) => {
+  const renderResults = results.map((result) => {
     return (
       <div key={result.pageid} className="item">
         <div className="right floated content">
