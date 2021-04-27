@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Accordion from './components/Accordion';
 import Search from './components/Search';
-import Dropdown from './components/Dropdown'
+import Dropdown from './components/Dropdown';
+import Translate from './components/Translate'
 const items = [
   {
     title: 'Why learn react?',
@@ -33,18 +34,11 @@ const options = [
 ]
 
 export default () => {
-  const [selected, setSelected] = useState(options[0]);
-  const [showDrop, setShowDrop] = useState(true);
+
+
   return (
     <div>
-      <button onClick={() => setShowDrop(!showDrop)}>Click</button>
-      { showDrop ?
-        <Dropdown 
-          options={options} 
-          selected={selected}
-          onSetSelected={setSelected}
-        /> : null
-      }
+      <Translate />
     </div>
   )
 }
