@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Accordion from './components/Accordion';
 import Search from './components/Search';
 import Dropdown from './components/Dropdown';
-import Translate from './components/Translate'
+import Translate from './components/Translate';
+import Route from './components/Route'
 const items = [
   {
     title: 'Why learn react?',
@@ -58,12 +59,26 @@ const showDropdown = () => {
 }
 
 export default () => {
+  const [selected, onSetSelected] = useState(options[0]);
   return (
     <div>
-      {showAcordion()}
-      {showTranslate()}
-      {showLIst()}
-      {showDropdown()}
+      <Route path='/'>
+        <Accordion items={items} />
+      </Route>
+      <Route path='/list'>
+        <Search />
+      </Route>
+      <Route path='/translate'>
+        <Translate />
+      </Route>
+      <Route path='/dropdown'>
+        <Dropdown
+          label="Select a color"
+          options={options}
+          selected={selected}
+          onSetSelected={onSetSelected}
+        />
+      </Route>
     </div>
   );
 };
