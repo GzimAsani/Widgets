@@ -4,6 +4,7 @@ import Search from './components/Search';
 import Dropdown from './components/Dropdown';
 import Translate from './components/Translate';
 import Route from './components/Route'
+import Header from './components/Header'
 const items = [
   {
     title: 'Why learn react?',
@@ -34,34 +35,11 @@ const options = [
   }
 ]
 
-const showAcordion = () => {
-  if (window.location.pathname === '/') {
-   return <Accordion items={items} />
-  }
-}
-
-const showTranslate = () => {
-  if (window.location.pathname === '/translate') {
-    return <Translate />
-  }
-}
-
-const showLIst = () => {
-  if (window.location.pathname === '/list') {
-    return <Search/>
-  }
-}
-
-const showDropdown = () => {
-  if (window.location.pathname === '/dropdown') {
-    return <Dropdown  /> //label={label} options={options} 
-  }
-}
-
 export default () => {
   const [selected, onSetSelected] = useState(options[0]);
   return (
     <div>
+      <Header />
       <Route path='/'>
         <Accordion items={items} />
       </Route>
